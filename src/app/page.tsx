@@ -1,7 +1,19 @@
+'use client';
+
 import Image from 'next/image'
 import styles from './page.module.css'
+import { useLocalData } from './Hooks/useLocalData'
+import { useRouter } from 'next/navigation';
 
 export default function Home() {
+  const { updateLocalData } = useLocalData()
+  const router = useRouter()
+
+  function updateJotai() {
+    updateLocalData({ valueOne: 'Tiago', valueTwo: 'Montes' })
+    router.push('/route')
+  }
+
   return (
     <main className={styles.main}>
       <div className={styles.description}>
@@ -40,17 +52,12 @@ export default function Home() {
       </div>
 
       <div className={styles.grid}>
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
+        <button className={styles.card} onClick={updateJotai}>
           <h2>
-            Docs <span>-&gt;</span>
+            Test jotai
           </h2>
-          <p>Find in-depth information about Next.js features and API.</p>
-        </a>
+          <p>This button will test JOTAI.</p>
+        </button>
 
         <a
           href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
